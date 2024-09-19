@@ -1,0 +1,211 @@
+/* Autor: Gabriel Oliveira */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas;
+}
+
+/* Estilo geral do corpo da página */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f2f5; /* Cor de fundo suave */
+  flex-direction: column; /* Adiciona coluna para rodapé */
+}
+
+/* Estilo para o modo escuro */
+.dark {
+  background: #1c1c1c;
+}
+
+/* Estilo da calculadora */
+.calculator {
+  position: relative;
+  width: 350px; /* Largura da calculadora */
+  padding: 20px;
+  border-radius: 15px; /* Borda arredondada */
+  background: #ffffff; /* Fundo branco */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), /* Sombra sutil */
+              0px 4px 8px rgba(0, 0, 0, 0.1) inset;
+  border: 1px solid #ddd; /* Borda clara */
+}
+
+/* Estilo da calculadora no modo escuro */
+.dark .calculator {
+  background: #2a2a2a; /* Fundo escuro */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5),
+              0px 4px 8px rgba(0, 0, 0, 0.3) inset;
+  border: 1px solid #444; /* Borda escura */
+}
+
+/* Estilo dos botões da calculadora */
+.calculator .buttons {
+  position: relative;
+  display: grid;
+  gap: 10px; /* Espaçamento entre os botões */
+  grid-template-columns: repeat(4, 1fr); /* Layout de 4 colunas */
+}
+
+/* Estilo da área de exibição dos cálculos */
+.calculator .buttons #value {
+  grid-column: span 4;
+  user-select: none;
+  overflow: hidden;
+  height: 80px; /* Altura ajustada */
+  width: 100%;
+  text-align: right;
+  color: #333; /* Cor do texto */
+  background: #f5f5f5; /* Cor de fundo clara */
+  line-height: 80px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1),
+              inset 0px -4px 8px rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-bottom: 15px; /* Margem ajustada */
+  padding: 0 15px;
+  font-size: 1.8em; /* Tamanho da fonte ajustado */
+  font-weight: 600; /* Peso da fonte ajustado */
+}
+
+/* Estilo da área de exibição no modo escuro */
+.dark .calculator .buttons #value {
+  color: #e0e0e0; /* Cor do texto no modo escuro */
+  background: #333; /* Cor de fundo escura */
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3),
+              inset 0px -4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo dos botões da calculadora */
+.calculator .buttons span {
+  padding: 15px; /* Aumentado para melhor clique */
+  background: #007bff; /* Cor azul dos botões */
+  color: #ffffff; /* Texto branco */
+  border-radius: 8px; /* Borda arredondada dos botões */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+              0px 4px 8px rgba(0, 0, 0, 0.1) inset;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.2em; /* Tamanho da fonte dos botões */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s, color 0.3s; /* Transição suave */
+}
+
+/* Estilo dos botões no modo escuro */
+.dark .calculator .buttons span {
+  background: #0056b3; /* Azul mais escuro no modo escuro */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3),
+              0px 4px 8px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* Estilo dos botões ao serem clicados */
+.calculator .buttons span:active {
+  background: #0056b3; /* Azul mais escuro ao clicar */
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3),
+              inset 0px -4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Estilo dos botões específicos ao serem clicados no modo escuro */
+.dark .calculator .buttons span:active {
+  background: #004494; /* Azul ainda mais escuro no modo escuro */
+}
+
+/* Estilo específico para o botão Limpar */
+.calculator .buttons span#clear {
+  grid-column: span 2;
+  background: #dc3545; /* Vermelho para o botão Limpar */
+}
+
+/* Estilo específico para o botão Adição */
+.calculator .buttons span#plus {
+  grid-row: span 2;
+  background: #28a745; /* Verde para o botão Adição */
+}
+
+/* Estilo específico para o botão Igual */
+.calculator .buttons span#equal {
+  grid-row: span 2;
+  background: #17a2b8; /* Azul claro para o botão Igual */
+}
+
+/* Estilo dos botões específicos ao serem clicados */
+.calculator .buttons span#clear:active,
+.calculator .buttons span#plus:active,
+.calculator .buttons span#equal:active {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+              inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo dos botões específicos ao serem clicados no modo escuro */
+.dark .calculator .buttons span#clear:active,
+.dark .calculator .buttons span#plus:active,
+.dark .calculator .buttons span#equal:active {
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão para alternar o modo escuro */
+.toggleBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 30px; /* Aumentado para melhor usabilidade */
+  width: 30px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #007bff, #0056b3); /* Gradiente azul */
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+              0px 4px 8px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Estilo do botão no modo escuro */
+.dark .toggleBtn {
+  background: linear-gradient(145deg, #cfd3d6, #edf1f4);
+}
+
+/* Efeito de clique no botão */
+.toggleBtn:active {
+  transform: scale(0.95); /* Efeito de "pressionado" */
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3),
+              inset 0px -4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Efeito de hover para melhorar a experiência do usuário */
+.toggleBtn:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3),
+              0px 6px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Estilo do rodapé */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff; /* Fundo branco */
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 10px 0;
+  color: #333; /* Cor do texto */
+  font-size: 0.9em;
+  border-top: 1px solid #ddd; /* Borda superior */
+}
+
+/* Estilo do rodapé no modo escuro */
+.dark footer {
+  background: #2a2a2a; /* Fundo escuro */
+  color: #e0e0e0; /* Cor do texto no modo escuro */
+  border-top: 1px solid #444; /* Borda escura */
+}
+
+/* Estilo dos links no rodapé */
+footer a {
+  color: #007bff; /* Azul dos links */
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
